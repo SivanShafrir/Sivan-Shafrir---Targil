@@ -38,6 +38,7 @@ public class Menu {
         }
         printMenu();
     }
+
     public static String readInput(){
         String input = null;
         BufferedReader bufferedReader = new BufferedReader(

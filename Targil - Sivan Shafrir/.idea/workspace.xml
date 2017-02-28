@@ -19,18 +19,18 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="25" lean-forward="false" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
+            <state relative-caret-position="85">
+              <caret line="5" column="18" lean-forward="true" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FileOperations.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FileOperations.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/FileOperations.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+            <state relative-caret-position="128">
+              <caret line="21" column="65" lean-forward="true" selection-start-line="21" selection-start-column="65" selection-end-line="21" selection-end-column="65" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -41,8 +41,8 @@
       <file leaf-file-name="EncryptFile.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/EncryptFile.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="20" lean-forward="false" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="20" />
+            <state relative-caret-position="238">
+              <caret line="14" column="42" lean-forward="true" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -53,8 +53,8 @@
       <file leaf-file-name="DecryptFile.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/DecryptFile.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="88" lean-forward="true" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="88" />
+            <state relative-caret-position="238">
+              <caret line="14" column="42" lean-forward="true" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -62,14 +62,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Menu.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Menu.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/company/Menu.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="40" column="34" lean-forward="false" selection-start-line="40" selection-start-column="25" selection-end-line="40" selection-end-column="34" />
+            <state relative-caret-position="213">
+              <caret line="23" column="20" lean-forward="false" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1488276282551" expanded="true" signature="645:1182" ph="{...}" />
+                <marker date="1488286090183" expanded="true" signature="645:1182" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -96,9 +96,9 @@
         <option value="$PROJECT_DIR$/src/com/company/File.java" />
         <option value="$PROJECT_DIR$/src/FileOperations.java" />
         <option value="$PROJECT_DIR$/src/com/company/Main.java" />
-        <option value="$PROJECT_DIR$/src/com/company/Menu.java" />
         <option value="$PROJECT_DIR$/src/com/company/EncryptFile.java" />
         <option value="$PROJECT_DIR$/src/com/company/DecryptFile.java" />
+        <option value="$PROJECT_DIR$/src/com/company/Menu.java" />
         <option value="$PROJECT_DIR$/src/com/company/FileOperations.java" />
       </list>
     </option>
@@ -567,12 +567,12 @@
       <option name="presentableId" value="Default" />
       <updated>1488267294907</updated>
       <workItem from="1488267300492" duration="5159000" />
-      <workItem from="1488272665353" duration="9073000" />
+      <workItem from="1488272665353" duration="11703000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14232000" />
+    <option name="totallyTimeSpent" value="16862000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1" y="1" width="1918" height="1038" extended-state="1" />
@@ -655,7 +655,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1488276282551" expanded="true" signature="645:1182" ph="{...}" />
+            <marker date="1488286090183" expanded="true" signature="645:1182" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -669,51 +669,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/com/company/DecryptFile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="25" lean-forward="false" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/Menu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="40" column="34" lean-forward="false" selection-start-line="40" selection-start-column="25" selection-end-line="40" selection-end-column="34" />
+        <state relative-caret-position="238">
+          <caret line="14" column="42" lean-forward="true" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1488276282551" expanded="true" signature="645:1182" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/EncryptFile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="20" lean-forward="false" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="20" />
+        <state relative-caret-position="238">
+          <caret line="14" column="42" lean-forward="true" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/company/DecryptFile.java">
+    <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="88" lean-forward="true" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="88" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="85">
+          <caret line="5" column="18" lean-forward="true" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/FileOperations.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+        <state relative-caret-position="128">
+          <caret line="21" column="65" lean-forward="true" selection-start-line="21" selection-start-column="65" selection-end-line="21" selection-end-column="65" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/company/Menu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="23" column="20" lean-forward="false" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1488286090183" expanded="true" signature="645:1182" ph="{...}" />
           </folding>
         </state>
       </provider>
