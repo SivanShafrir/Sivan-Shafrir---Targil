@@ -15,7 +15,7 @@ public class Menu {
         System.out.println("please choose:");
         System.out.println("1. If you want to encrypt the file Press 1");
         System.out.println("2. If you want to decrypt the file Press 2");
-        System.out.println("0. exit");
+        System.out.println("0. exit!");
         System.out.println("your choice: ");
         String input = readInput();
         if (input.length() != 0) {
