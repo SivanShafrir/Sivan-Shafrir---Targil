@@ -30,7 +30,7 @@ public class DecryptFile implements Operations {//"Decrypt"
         int key= enterKey();
         OutputStream outputStream = null;
         InputStream inputStream = null;
-        String fileName = sourceFile.getAbsolutePath();
+        String fileName = sourceFile.getAbsolutePath(); /// להוציא החוצה את הלוגיקה של זיהוי הנקודה
         int pos = fileName.lastIndexOf(".");
         if (pos > 0) {
             fileName = fileName.substring(0, pos);

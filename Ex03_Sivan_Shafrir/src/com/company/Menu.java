@@ -59,12 +59,17 @@ public class Menu {
                     break;
                 case "0":
                     myOutput.output("Exit");
-                    return;
-                default:
+                    //return;
+                default: {
                     myOutput.output("invalid option. try again.");
+                   // return;
+                }
             }
         }
-        else myOutput.output("Something went wrong. Please try again");
+        else {
+            myOutput.output("Something went wrong. Please try again");
+            return;
+        }
        printMenu();
     }
 

@@ -12,6 +12,10 @@ import static org.mockito.Mockito.*;
 /**
  * Created by hackeru on 3/16/2017.
  */
+
+
+//לתקן את הטסטים שיתמכו בפעולה של הקוד.
+
 class MenuTest {
 
     int outputCount = 0;
@@ -70,8 +74,10 @@ class MenuTest {
         Output output = mock(Output.class);
         Menu myMenu1 = new Menu(output,input);
         when(input.input()).thenReturn("").thenReturn("0");
+        myMenu1.myChoice();
         InOrder orderedOutput = inOrder(output);
-        orderedOutput.verify(output).output("assertion failed for blank");
+        orderedOutput.verify(output).output("Something went wrong. Please try again");
+
        // Assertions.assertEquals(myMenu.myChoice(""), "Something went wrong. Please try again", "assertion failed for blank");
     }
     @Test
@@ -80,8 +86,9 @@ class MenuTest {
         Output output = mock(Output.class);
         Menu myMenu1 = new Menu(output,input);
         when(input.input()).thenReturn("\n").thenReturn("0");
+        myMenu1.myChoice();
         InOrder orderedOutput = inOrder(output);
-        orderedOutput.verify(output).output("assertion failed for Enter");
+        orderedOutput.verify(output).output("invalid option. try again.");
        // Assertions.assertEquals(myMenu.myChoice("\n"), "invalid option. try again.", "assertion failed for Enter");
     }
 
@@ -91,8 +98,9 @@ class MenuTest {
         Output output = mock(Output.class);
         Menu myMenu1 = new Menu(output,input);
         when(input.input()).thenReturn("a").thenReturn("0");
+        myMenu1.myChoice();
         InOrder orderedOutput = inOrder(output);
-        orderedOutput.verify(output).output("assertion failed for letter");
+        orderedOutput.verify(output).output("invalid option. try again.");
       //  Assertions.assertEquals(myMenu.myChoice("a"), "invalid option. try again.", "assertion failed for letter");
     }
 
@@ -102,8 +110,9 @@ class MenuTest {
         Output output = mock(Output.class);
         Menu myMenu1 = new Menu(output,input);
         when(input.input()).thenReturn("a").thenReturn("6");
+        myMenu1.myChoice();
         InOrder orderedOutput = inOrder(output);
-        orderedOutput.verify(output).output("assertion failed for number except 1,2");
+        orderedOutput.verify(output).output("invalid option. try again.");
        // Assertions.assertEquals(myMenu.myChoice("6"), "invalid option. try again.", "assertion failed for number except 1,2");
     }
 
