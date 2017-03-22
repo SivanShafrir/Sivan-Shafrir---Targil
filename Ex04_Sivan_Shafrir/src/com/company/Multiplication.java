@@ -1,16 +1,17 @@
 package com.company;
 
+import java.io.File;
 import java.io.*;
 
 /**
- * Created by Siven on 20/03/2017.
+ * Created by hackeru on 3/22/2017.
  */
-public class Xor extends AlgorithmOperation implements Operations {
+public class Multiplication extends AlgorithmOperation implements  Operations{
     Input input;
     Output output;
-   // File destinationFile;
+  //  File destinationFile;
 
-    public Xor(Input input, Output output) {
+    public Multiplication(Input input, Output output) {
         this.input = input;
         this.output = output;
     }
@@ -22,22 +23,36 @@ public class Xor extends AlgorithmOperation implements Operations {
             fileName = fileName.substring(0, pos);
         }
         if (type == 1) {
-            destinationFile = new File(new String(fileName + "_decrypted.txt"));
-        } else {
             destinationFile = new File(new String(fileName + "_encrypted.txt"));
+        } else {
+             destinationFile = new File(new String(fileName + "_decrypted.txt"));
         }
     }*/
-
     public void crypt(File sourceFile, int key, int type) {
+        makeFile(sourceFile, type);
         OutputStream outputStream = null;
         InputStream inputStream = null;
         try {
             inputStream = new FileInputStream(sourceFile);
             outputStream = new FileOutputStream(destinationFile);
             int buffer;
+            if (type==1) {
                 while ((buffer = inputStream.read()) != -1) {
-                    outputStream.write(buffer ^ key);
+                    outputStream.write(buffer * key);
                 }
+            } else {
+                int decryptionKey = 0;
+                for (int i = 1; i <= 255; i++) {
+                    if (((i * key) & 0x000000FF) == 1) {
+                        decryptionKey = i;
+                        break;
+                    }
+                }
+                while ((buffer = inputStream.read()) != -1) {
+                    outputStream.write(buffer * decryptionKey);
+                }
+            }
+
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -60,21 +75,21 @@ public class Xor extends AlgorithmOperation implements Operations {
     }
 
 
-
-
     @Override
-    public void decryptFile(File sourceFile, int key) {
+    public void encryptFile(File sourceFile, int key) {
         startedDecryption();
         makeFile(sourceFile,1);
         crypt(sourceFile,key,1);
         finishedDecryption();
+
     }
 
     @Override
-    public void encryptFile(File sourceFile, int key) {
+    public void decryptFile(File sourceFile, int key) {
         startedEncryption();
         makeFile(sourceFile,2);
         crypt(sourceFile,key,2);
         finishedEncryption();
     }
+
 }
