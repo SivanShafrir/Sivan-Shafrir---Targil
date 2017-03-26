@@ -6,28 +6,42 @@ import java.util.function.ToDoubleBiFunction;
 /**
  * Created by hackeru on 3/22/2017.
  */
-public class Double <T extends Operations,K extends Operations> implements Operations {
-    T firstAlgorithm;
-    K secondAlgorithm;
+public class Double implements Operations {// <T extends Operations,K extends Operations>
+    Operations firstAlgorithm;
+    Operations secondAlgorithm;
+    Integer key2;
 
-    public Double(T firstAlgorithm, K secondAlgorithm) {
+    public Double(Operations firstAlgorithm, Operations secondAlgorithm) {
         this.firstAlgorithm = firstAlgorithm;
         this.secondAlgorithm = secondAlgorithm;
     }
 
-    @Override
-    public void decryptFile(File sourceFile, int key) {
-        secondAlgorithm.decryptFile(sourceFile,key);
-        firstAlgorithm.decryptFile( new File(new AlgorithmOperation().makeFile(sourceFile,1)),1);
-        //TODO: delete unneccssary file
+    public void setKey(int key) {
+        this.key2 = key;
+    }
+
+    private void reverseDouble(int key) {
+        if (key2 == null)
+            key2 = key;
     }
 
     @Override
-    public void encryptFile(File sourceFile, int key) {
-        firstAlgorithm.encryptFile(sourceFile,key);
-        secondAlgorithm.encryptFile(new File(new AlgorithmOperation().makeFile(sourceFile,2)),2);
-        //למחוק את הקובץ שיצא מפירסט אלגוריתם - לא צריך אותו
-        //TODO: delete unneccssary file
+    public void decryptFile(File file, File returnFile, int key) {
+        String newName = file.getPath().substring(0, file.getPath().lastIndexOf('.')) + ".decrypted.temp.txt";
+        File temp = new File(newName);
+        reverseDouble(key);
+        secondAlgorithm.decryptFile(file, temp, key);
+        firstAlgorithm.decryptFile(temp, returnFile, key2);
+        temp.delete();
+    }
 
+    @Override
+    public void encryptFile(File file, File returnFile, int key) {
+        String newName = file.getPath().substring(0, file.getPath().lastIndexOf('.')) + ".encrypted.temp.txt";
+        File temp = new File(newName);
+        reverseDouble(key);
+        firstAlgorithm.encryptFile(file, temp, key);
+        secondAlgorithm.encryptFile(temp, returnFile, key2);
+        temp.delete();
     }
 }

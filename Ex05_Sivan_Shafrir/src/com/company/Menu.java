@@ -1,5 +1,7 @@
 package com.company;
 
+//import com.sun.java.util.jar.pack.Package;
+
 import java.io.File;
 import java.util.Random;
 
@@ -8,13 +10,19 @@ import java.util.Random;
  */
 public class Menu implements AlgorithmOperation.Listener {
 
+    public static final String ENCRYPTION = "1";
+    public static final String DECRYPTION = "2";
+    public static final String EXIT = "0";
     Output myOutput;
     Input myInput;
+    MyFile myFile;
     FileOperations myFileOperations = new FileOperations();
     Operations operations;
     String filePathString;
-    File filePath;
+    File file;
     String inputChoose;
+    Double doubleAlgorithm;
+    DoubleKey doubleKey;
 
 
     public Menu(Output myOutput, Input myInput) {
@@ -33,21 +41,18 @@ public class Menu implements AlgorithmOperation.Listener {
         input = myInput.input();
         if (input.length() != 0) {
             switch (input) {
-                case "1":
-                    getPathFromUser();
-                    operations= chooseAlgoritem();
-                    operations.encryptFile(filePath, keyLottery());
+                case ENCRYPTION:
+                    encryption();
                     break;
-                case "2":
-                    getPathFromUser();
-                    operations= chooseAlgoritem();
-                    operations.decryptFile(filePath, enterKey());
+                case DECRYPTION:
+                    decryption();
                     break;
-                case "0":
-                    myOutput.output("Exit");
+                case EXIT:
+                    myOutput.output("bye bye ");
                     return;
                 default: {
                     myOutput.output("invalid option. try again.");
+                    printMenu();
                 }
             }
         } else {
@@ -57,27 +62,55 @@ public class Menu implements AlgorithmOperation.Listener {
         printMenu();
     }
 
+    private void decryption() {
+        file =getPathFromUser();
+        createAlgorithm();
+        File fileDecrypt = new File(AlgorithmOperation.fileExtension(file, 2));
+        System.out.println("enter key path");
+        myFile = new MyFile("");
+        String keyPath = myInput.input();
+        DoubleKey doubleKey1 = new DoubleKey();
+        doubleKey1 = (DoubleKey)myFile.readObjectFromFile (new File(keyPath));
+        System.out.println(doubleKey1.secondKey);
+        System.out.println(doubleKey1.firstKey);
+        doubleAlgorithm.setKey(doubleKey1.firstKey);
+        doubleAlgorithm.decryptFile(file,fileDecrypt,doubleKey1.secondKey);
+    }
+
+    private void encryption() {
+        file = getPathFromUser();
+        createAlgorithm();
+        doubleKey = new DoubleKey();
+        RandomKey randomKey = new RandomKey();
+        doubleKey.firstKey = randomKey.getKey();
+        doubleKey.secondKey= randomKey.getKey();
+        doubleAlgorithm.setKey(doubleKey.secondKey);
+        String prefix1 = file.getPath().substring(0, file.getPath().lastIndexOf('.'))+"key1.bin";
+        File fileKey1 = new File(prefix1);
+        MyFile myFile = new MyFile("");
+        myFile.writeObjectToFile(fileKey1,doubleKey);
+        System.out.println(doubleKey.firstKey);
+        System.out.println(doubleKey.secondKey);
+        File fileEncrypt = new File(AlgorithmOperation.fileExtension(file,1 ));
+        doubleAlgorithm.encryptFile(file,fileEncrypt, doubleKey.firstKey);
+    }
+
+    private void createAlgorithm() {
+         doubleAlgorithm= new Double(new Xor(myInput,myOutput),new Reverse(myInput,myOutput,
+                new Double(new Caesar(myInput,myOutput),new Multiplication(myInput,myOutput))));
+    }
+
     // פונקציה שקולטת את הנתיב מהמשתמש
-    public void getPathFromUser() {
+    public File getPathFromUser() {
         myOutput.output("Enter a file path:");
         filePathString = myInput.input();
         while (!(myFileOperations.checkpath(filePathString))) {
             filePathString = myInput.input();
         }
-        filePath = new File(filePathString);
+       return file = new File(filePathString);
     }
 
-    public int keyLottery() {
-      /*  Random random = new Random(System.currentTimeMillis());
-        int key = random.nextInt(255);*/
-      int key = new RandomKey().getKey();
-        if(Integer.parseInt(inputChoose)==4||Integer.parseInt(inputChoose)==0){
-            if(key%2==0)
-                key=key+1;
-        }
-        myOutput.output("The key is:" + key);
-        return key;
-    }
+
 
     public int enterKey() {
         myOutput.output("Enter the encryption key");
@@ -85,71 +118,19 @@ public class Menu implements AlgorithmOperation.Listener {
         return Integer.valueOf(k);//פונקצית המרה מסטרינג לאינט
     }
 
-    //לא להחזיר נאל
-    public Operations chooseAlgoritem() {
-        myOutput.output("please choose algorithm:\n 1.Caesar\n 2.Xor\n 3.Reverse\n 4.Multiplication\n");
 
-        inputChoose = myInput.input();
-        if (inputChoose.length() != 0) {
-            switch (inputChoose) {
-                case "1":
-                    return new Caesar(myInput, myOutput);
-                case "2":
-                    return new Xor(myInput, myOutput);
-                case "3":
-                    return chooseAlgorithmForReverse();
-                    // return new Reverse(myInput, myOutput, chooseAlgorithmForReverse());
-                case "4":
-                    return new Multiplication(myInput, myOutput);
-                default: {
-                    myOutput.output("invalid option. try again.");
-                   // chooseAlgoritem();
-                }
-            }
-        }
-        return  chooseAlgoritem();
-    }
 
-    //ליצור את האובייקט מסוג רוורס פה
-   public Operations chooseAlgorithmForReverse(){
-       myOutput.output("please choose algorithm:\n 1.Caesar\n 2.Xor\n3.Multiplication\n ");
-       String input;
-       input = myInput.input();
-       if (input.length() != 0) {
-           switch (input) {
-               case "1":
-                   return new Reverse(myInput, myOutput,new Caesar(myInput, myOutput));
-               case "2":
-                   return new Reverse(myInput, myOutput,new Xor(myInput, myOutput));
-               case "3":
-                   return new Reverse(myInput, myOutput,new Multiplication(myInput, myOutput));
-               default:
-                   myOutput.output("invalid option. try again.");
-
-           }
-       }
-       return chooseAlgorithmForReverse();
+    @Override
+    public void StartDetect() {
+        myOutput.output("the cipher is start \nthe time now is" + System.nanoTime());
     }
 
     @Override
-    public void startEncrypt() {
-        myOutput.output("started Encryption"+System.nanoTime());
+    public void EndDetect() {
+        myOutput.output("the cipher is end \nthe time now is" + System.nanoTime());
     }
 
-    @Override
-    public void finishEncrypt() {
-        myOutput.output("finish Encryption"+System.nanoTime());
-    }
-
-    @Override
-    public void startDecrypt() {
-        myOutput.output("started Decryption"+System.nanoTime());
-    }
-
-    @Override
-    public void finishDecrypt() {
-        myOutput.output("finished Decryption"+System.nanoTime());
-    }
 }
+
 
 
