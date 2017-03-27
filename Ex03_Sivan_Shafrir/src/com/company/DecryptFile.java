@@ -5,7 +5,7 @@ import java.io.*;
 /**
  * Created by hackeru on 2/28/2017.
  */
-public class DecryptFile implements Operations {//"Decrypt"
+public class DecryptFile  {//"Decrypt"implements Operations
     Input input;
     Output output;
 
@@ -22,10 +22,9 @@ public class DecryptFile implements Operations {//"Decrypt"
         output.output("Enter the encryption key in the file");
         String k= input.input();
         return Integer.valueOf(k);//פונקצית המרה מסטרינג לאינט
-
     }
 
-    @Override
+  //  @Override
     public String crypt(File sourceFile) {
         int key= enterKey();
         OutputStream outputStream = null;

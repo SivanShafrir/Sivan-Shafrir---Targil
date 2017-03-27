@@ -6,7 +6,7 @@ import java.util.Random;
 /**
  * Created by hackeru on 2/28/2017.
  */
-public class EncryptFile implements Operations {
+public class EncryptFile  {//implements Operations
     Output myOutput;
     Input myInput;
     int key;
@@ -33,7 +33,7 @@ public class EncryptFile implements Operations {
     }
 
 
-    @Override
+   // @Override
     public String crypt(File sourceFile) {
          keyLottery();
         OutputStream outputStream = null;

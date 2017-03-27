@@ -9,17 +9,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library" scope="TEST">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../sivan shafrir/mockito-all-1.9.5.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$MODULE_DIR$/../../../sivan shafrir/mockito-all-1.9.5.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" scope="TEST">
       <library name="JUnit5">
         <CLASSES>
           <root url="jar://$APPLICATION_HOME_DIR$/plugins/junit/lib/junit-jupiter-api-5.0.0-M3.jar!/" />
@@ -27,6 +16,17 @@
         </CLASSES>
         <JAVADOC />
         <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="TEST">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../mockito-all-1.9.5.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/../mockito-all-1.9.5.jar!/" />
+        </SOURCES>
       </library>
     </orderEntry>
   </component>

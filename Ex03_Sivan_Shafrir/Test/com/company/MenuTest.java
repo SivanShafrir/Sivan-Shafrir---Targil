@@ -52,7 +52,7 @@ class MenuTest {
                         break;
                     case 2:
 
-                        assertEquals("The key is:" + myMenu.encryptFile.getKey(), s);
+                        assertEquals("The key is:" + myMenu.keyLottery(), s);
                         break;
                     case 3:
                         assertEquals("Encrypt", s);
@@ -61,7 +61,6 @@ class MenuTest {
                 outputCount++;
             }
         };
-       // EncryptFile encryptFile = new EncryptFile(output,input);
         myMenu = new Menu(output,input);
         myMenu.printMenu();
     }
@@ -73,23 +72,20 @@ class MenuTest {
         Input input = mock(Input.class);
         Output output = mock(Output.class);
         Menu myMenu1 = new Menu(output,input);
-        when(input.input()).thenReturn("").thenReturn("0");
+        when(input.input()).thenReturn("").thenReturn("C:\\Users\\hackeru\\Documents\\GitHub\\Sivan-Shafrir---Targil\\sivan.txt").thenReturn("0");
         myMenu1.myChoice();
         InOrder orderedOutput = inOrder(output);
         orderedOutput.verify(output).output("Something went wrong. Please try again");
-
-       // Assertions.assertEquals(myMenu.myChoice(""), "Something went wrong. Please try again", "assertion failed for blank");
     }
     @Test
     void myChoiceTest2() {
         Input input = mock(Input.class);
         Output output = mock(Output.class);
         Menu myMenu1 = new Menu(output,input);
-        when(input.input()).thenReturn("\n").thenReturn("0");
+        when(input.input()).thenReturn("\n").thenReturn("C:\\Users\\hackeru\\Documents\\GitHub\\Sivan-Shafrir---Targil\\sivan.txt").thenReturn("0");
         myMenu1.myChoice();
         InOrder orderedOutput = inOrder(output);
         orderedOutput.verify(output).output("invalid option. try again.");
-       // Assertions.assertEquals(myMenu.myChoice("\n"), "invalid option. try again.", "assertion failed for Enter");
     }
 
     @Test
@@ -97,11 +93,10 @@ class MenuTest {
         Input input = mock(Input.class);
         Output output = mock(Output.class);
         Menu myMenu1 = new Menu(output,input);
-        when(input.input()).thenReturn("a").thenReturn("0");
+        when(input.input()).thenReturn("a").thenReturn("C:\\Users\\hackeru\\Documents\\GitHub\\Sivan-Shafrir---Targil\\sivan.txt").thenReturn("0");
         myMenu1.myChoice();
         InOrder orderedOutput = inOrder(output);
         orderedOutput.verify(output).output("invalid option. try again.");
-      //  Assertions.assertEquals(myMenu.myChoice("a"), "invalid option. try again.", "assertion failed for letter");
     }
 
     @Test
@@ -109,11 +104,10 @@ class MenuTest {
         Input input = mock(Input.class);
         Output output = mock(Output.class);
         Menu myMenu1 = new Menu(output,input);
-        when(input.input()).thenReturn("a").thenReturn("6");
+        when(input.input()).thenReturn("a").thenReturn("C:\\Users\\hackeru\\Documents\\GitHub\\Sivan-Shafrir---Targil\\sivan.txt").thenReturn("6");
         myMenu1.myChoice();
         InOrder orderedOutput = inOrder(output);
         orderedOutput.verify(output).output("invalid option. try again.");
-       // Assertions.assertEquals(myMenu.myChoice("6"), "invalid option. try again.", "assertion failed for number except 1,2");
     }
 
 
