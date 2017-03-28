@@ -8,27 +8,12 @@ import java.io.*;
 public class AlgorithmOperation implements Operations{//
     public static final int decryption = 2;
     public static final int encryption = 1;
-   File destinationFile;
     public static Listener listener;
 
     public static void setListener(Listener listener) {
         AlgorithmOperation.listener = listener;
     }
 
-
-  /*  public String makeFile(File sourceFile, int type) {
-        String fileName = sourceFile.getAbsolutePath();
-        int pos = fileName.lastIndexOf(".");
-        if (pos > 0) {
-            fileName = fileName.substring(0, pos);
-        }
-        if (type == 1) {
-            destinationFile = new File(new String(fileName + "_decrypted.txt"));
-        } else {
-            destinationFile = new File(new String(fileName + "_encrypted.txt"));
-        }
-        return destinationFile.getAbsolutePath();
-    }*/
     public static String fileExtension(File file, int type)
     {
         String prefix = file.getPath().substring(0, file.getPath().lastIndexOf('.'));
@@ -42,7 +27,7 @@ public class AlgorithmOperation implements Operations{//
         return fullPath;
     }
 
-    void operationByKey(File file, File newFile, int type, int key) {
+    void operationByKey(File file, File newFile, int type) {
         started();
         OutputStream outputStream = null;
         InputStream inputStream = null;
@@ -53,9 +38,9 @@ public class AlgorithmOperation implements Operations{//
             while ((oneByte = inputStream.read()) != -1)
             {
                 if (type == decryption)
-                    oneByte = operationDecryption(oneByte, key);
+                    oneByte = operationDecryption(oneByte);
                 else
-                    oneByte = operationEncryption(oneByte, key);
+                    oneByte = operationEncryption(oneByte);//, key
                 outputStream.write(oneByte);
             }
             ended();
@@ -80,23 +65,29 @@ public class AlgorithmOperation implements Operations{//
         }
     }
 
-    public int operationEncryption(int oneByte, int key) {
+    public int operationEncryption(int oneByte) {
         return oneByte;
-    }
+    }//, int key
 
-    public int operationDecryption(int oneByte, int key) {
+    Key getkey(){return null;};
+
+
+
+    public int operationDecryption(int oneByte) {
         return oneByte;
+    }//, int key
+
+    @Override
+    public void decryptFile(File file, File returnFile) {
+        operationByKey(file, returnFile, decryption);
     }
 
     @Override
-    public void decryptFile(File file, File returnFile, int key) {
-        operationByKey(file, returnFile, decryption, key);
+    public void encryptFile(File file, File returnFile) {
+        operationByKey(file, returnFile, encryption);
     }
 
-    @Override
-    public void encryptFile(File file, File returnFile, int key) {
-        operationByKey(file, returnFile, encryption, key);
-    }
+
     void started() {
         if (listener != null)
             listener.StartDetect();
