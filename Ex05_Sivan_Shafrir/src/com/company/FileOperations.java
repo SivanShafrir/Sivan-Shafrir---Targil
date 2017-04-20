@@ -1,11 +1,11 @@
-package com.company;
+/*package com.company;
 
 
 import java.io.File;
 
-/**
+*//**
  * Created by hackeru on 2/28/2017.
- */
+ *//*
 public class FileOperations {
 
 
@@ -18,4 +18,4 @@ public class FileOperations {
     }
 
 
-}
+}*/

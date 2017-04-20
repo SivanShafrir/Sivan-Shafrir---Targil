@@ -1,132 +1,121 @@
 package com.company;
 
-//import com.sun.java.util.jar.pack.Package;
-
 import java.io.File;
-import java.util.Random;
+import java.io.IOException;
+
 
 /**
- * Created by hackeru on 3/15/2017.
+ * Created by Siven on 20/03/2017.
  */
-public class Menu implements AlgorithmOperation.Listener {
+public class Menu {
 
-    public static final String ENCRYPTION = "1";
-    public static final String DECRYPTION = "2";
-    public static final String EXIT = "0";
-    Output myOutput;
-    Input myInput;
-    MyFile myFile;
-    FileOperations myFileOperations = new FileOperations();
-    Operations operations;
-    String filePathString;
-    File file;
-    String inputChoose;
-    Double doubleAlgorithm;
-    DoubleKey doubleKey;
-    RandomKey randomKey = new RandomKey();
+    public static final int ENCRYPTION = 1;
+    public static final int DECRYPTION = 2;
+    private Input input;
+    private Output output;
+    private RandomKeyGenerator randomKey;
+    private EncryptionDecryptionListener encryptionListener ;
 
-
-    public Menu(Output myOutput, Input myInput) {
-        this.myOutput = myOutput;
-        this.myInput = myInput;
-    }
-
-    public void printMenu() {
-        myOutput.output("please choose:\n 1. If you want to encrypt the file Press 1\n 2. If you want to decrypt the file Press 2\n 0. exit\n your choice:\n");
-        myChoice();
+    public Menu(Input input, Output output) {
+        this.input = input;
+        this.output = output;
+        this.encryptionListener = new EncryptionDecryptionListener(output);
+        this.randomKey=new RandomKeyGenerator();
     }
 
 
-    public void myChoice() {
-        String input;
-        input = myInput.input();
-        if (input.length() != 0) {
-            switch (input) {
-                case ENCRYPTION:
-                    encryption();
-                    break;
-                case DECRYPTION:
-                    decryption();
-                    break;
-                case EXIT:
-                    myOutput.output("bye bye ");
-                    return;
-                default: {
-                    myOutput.output("invalid option. try again.");
-                    printMenu();
-                }
+    public String getInitialInstructions(){
+        return "please choose:\n 1 for encryption \n 2 for  decryption \n exit for Exit";
+    }
+
+    public void start(){
+        String userInput=null;
+        if(input != null && output !=null){
+            output.output(getInitialInstructions());
+            while (!((userInput=input.input()).equals("exit"))){
+                processInput(userInput);
             }
-        } else {
-            myOutput.output("Something went wrong. Please try again");
-            return;
         }
-        printMenu();
     }
 
-    private void decryption() {
-        file =getPathFromUser();
-        createAlgorithm(doubleKey);
-        File fileDecrypt = new File(AlgorithmOperation.fileExtension(file, 2));
-        System.out.println("enter key path");
-        myFile = new MyFile("");
-        String keyPath = myInput.input();
-        doubleKey = (DoubleKey)myFile.readObjectFromFile (new File(keyPath));
-        doubleAlgorithm.setKeyDouble(doubleKey);
-        doubleAlgorithm.decryptFile(file,fileDecrypt);
-    }
+    public void processInput(String inputFromUser){
 
-    private void encryption() {
-        file = getPathFromUser();
-        File fileEncrypt = new File(AlgorithmOperation.fileExtension(file,1 ));
-        doubleKey = new DoubleKey(randomKey,randomKey);
-        createAlgorithm(doubleKey);
-        writeKeyToFile();
-        doubleAlgorithm.encryptFile(file,fileEncrypt);
-    }
+        int choose = Integer.valueOf(inputFromUser);
+        AlgorithmOperation cipher=null;
+        AlgorithmOperation reverseAlgorithm=null;
+        FileEncryptorDecryptor encryptor = new FileEncryptorDecryptor();
 
-    private void writeKeyToFile() {
-        String prefix1 = file.getPath().substring(0, file.getPath().lastIndexOf('.'))+"key1.bin";
-        File fileKey1 = new File(prefix1);
-        MyFile myFile = new MyFile("");
-        myFile.writeObjectToFile(fileKey1,doubleKey);
-    }
+        CreateKeysFile createKeysFile=new CreateKeysFile();
+        try{
+            if(choose ==ENCRYPTION){
+                encryptionListener.onStart();
+                File keysFile = getFile(true);
+                DoubleKey<Key<Integer>, DoubleKey<Key<Integer>, Key<Integer>>> keys = createKeysFile.createKey();
+                createKeysFile.writeKey(keys, keysFile);
 
-    private void createAlgorithm(DoubleKey doubleKey) {
-         doubleAlgorithm= new Double(new Xor(myInput,myOutput,doubleKey.firstKey),new Reverse(myInput,myOutput,
-                new Double(new Caesar(myInput,myOutput,doubleKey.secondKey),new Multiplication(myInput,myOutput,doubleKey.secondKey))));
-    }
+                Key<Integer> key1 = keys.getKey1();
+                Key<Integer> key2 = keys.getKey2().getKey1();
+                Key<Integer> key3 = keys.getKey2().getKey2();
 
-    // פונקציה שקולטת את הנתיב מהמשתמש
-    public File getPathFromUser() {
-        myOutput.output("Enter a file path:");
-        filePathString = myInput.input();
-        while (!(myFileOperations.checkpath(filePathString))) {
-            filePathString = myInput.input();
+                printKeys(key1,key2,key3);
+
+                reverseAlgorithm=new Reverse(new Double( new Caesar( key1),  new Multiplication( key3 )));
+                cipher=new Double(new Xor(key2),  reverseAlgorithm);
+                File fileFromUser=getFile(false);
+                encryptor.encryptFile(fileFromUser, cipher);
+                encryptionListener.onEnd();
+
+            }else if(choose==DECRYPTION){
+
+                encryptionListener.onStart();
+                File keysFile = getFile(true);
+                DoubleKey<Key<Integer>, DoubleKey<Key<Integer>, Key<Integer>>> keys = createKeysFile.getKey(keysFile);
+                Key<Integer> key1 = keys.getKey1();
+                Key<Integer> key2 = keys.getKey2().getKey1();
+                Key<Integer> key3 = keys.getKey2().getKey2();
+
+                printKeys(key1,key2,key3);
+
+                reverseAlgorithm=new Reverse(new Double( new Caesar(key1 ), new Multiplication( key3  )));
+                cipher = new Double( new Xor(key2  ), reverseAlgorithm);
+                File fileFromUser=getFile(false);
+                encryptor.decryptFile(fileFromUser, cipher);
+                encryptionListener.onEnd();
+            }
+
+            start();
+        } catch (InvalidKeyException e){
+            output.output(e.getMessage());
+        }catch (IOException e){
+            output.output(e.getMessage());
         }
-       return file = new File(filePathString);
+        catch (ClassNotFoundException e){
+            output.output(e.getMessage());
+        }
+        catch (Exception e){
+            output.output("error!");
+        }
     }
 
-
-
-    public int enterKey() {
-        myOutput.output("Enter the encryption key");
-        String k = myInput.input();
-        return Integer.valueOf(k);//פונקצית המרה מסטרינג לאינט
+    public File getFile(boolean isKeyFile){
+        if (isKeyFile)
+            output.output("enter path of Key File");
+        else
+            output.output("enter path of encrypt \\ decrypt File");
+        String path=input.input();
+        HandlerFile file = new HandlerFile(path);
+        boolean isValidPath = file.checkFile();
+        if (!isValidPath) {
+            output.output("is not file or file not exists. please enter path again.");
+            getFile(isKeyFile);
+        }
+        return file;
     }
 
-
-
-    @Override
-    public void StartDetect() {
-        myOutput.output("the cipher is start \nthe time now is" + System.nanoTime());
-    }
-
-    @Override
-    public void EndDetect() {
-        myOutput.output("the cipher is end \nthe time now is" + System.nanoTime());
+    public void printKeys(Key<Integer> key1, Key<Integer> key2, Key<Integer> key3){
+        output.output("key1: "+ key1.getKeyValue());
+        output.output("key2: "+ key2.getKeyValue());
+        output.output("key3: "+ key3.getKeyValue());
     }
 
 }
-
-
-

@@ -5,27 +5,20 @@ import java.io.File;
 /**
  * Created by Siven on 20/03/2017.
  */
-public class Reverse extends AlgorithmOperation  {
-    Input input;
-    Output output;
-    Operations operationsAlgorithmToUse;
+public class Reverse<T> extends AlgorithmOperation<T>  {
+    AlgorithmOperation makingAlgorithm;
 
-
-
-    public Reverse(Input input, Output output, Operations operationsAlgorithmToUse) {
-        this.input = input;
-        this.output = output;
-        this.operationsAlgorithmToUse = operationsAlgorithmToUse;
+    public Reverse(AlgorithmOperation decOrEnc) {
+        this.makingAlgorithm = decOrEnc;
     }
 
     @Override
-    public void decryptFile(File file, File returnFile) {
-        super.encryptFile(file, returnFile);
+    public int decryption(int oneByte) {
+        return makingAlgorithm.encryption(oneByte);
     }
-//, int key, key
+
     @Override
-    public void encryptFile(File file, File returnFile) {
-        super.decryptFile(file, returnFile);
+    public int encryption(int oneByte) {
+        return makingAlgorithm.decryption(oneByte);
     }
-    //, int key, key
 }

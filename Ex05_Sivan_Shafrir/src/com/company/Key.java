@@ -3,8 +3,16 @@ package com.company;
 import java.io.Serializable;
 
 /**
- * Created by hackeru on 3/22/2017.
+ * Created by Siven on 20/03/2017.
  */
-public interface Key<T> extends Serializable {
-    T getKey();
+public class Key<K> implements Serializable{
+    private K keyValue;
+
+    public Key(K key) {
+        this.keyValue = key;
+    }
+
+    public K getKeyValue() {
+        return keyValue;
+    }
 }

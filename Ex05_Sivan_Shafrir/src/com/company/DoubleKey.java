@@ -1,32 +1,33 @@
 package com.company;
 
-import com.company.Key;
-
 import java.io.Serializable;
 
-public class DoubleKey <T,S> implements Serializable {
+/**
+ * Created by Siven on 20/03/2017.
+ */
+public class DoubleKey<T,S> implements Serializable {
 
-    Key<T> firstKey;
-    Key<S> secondKey;
+    T key1;
+    S key2;
 
-    public Key<S> getSecondKey() {
-        return secondKey;
+    public DoubleKey(T key1, S key2) {
+        this.key1 = key1;
+        this.key2 = key2;
     }
 
-    public DoubleKey(Key<T> firstKey, Key<S> secondKey) {
-        this.firstKey = firstKey;
-        this.secondKey = secondKey;
+    public T getKey1() {
+        return key1;
     }
 
-    public void setSecondKey(Key<S> secondKey) {
-        this.secondKey = secondKey;
+    public void setKey1(T key1) {
+        this.key1 = key1;
     }
 
-    public Key<T> getFirstKey() {
-        return firstKey;
+    public S getKey2() {
+        return key2;
     }
 
-    public void setFirstKey(Key<T> key) {
-        firstKey=key;
+    public void setKey2(S key2) {
+        this.key2 = key2;
     }
 }

@@ -5,32 +5,20 @@ import java.io.*;
 /**
  * Created by Siven on 20/03/2017.
  */
-public class Caesar extends AlgorithmOperation {
+public class Caesar extends AlgorithmOperation<Integer> {
 
-    Input input;
-    Output output;
-    RandomKey key;
-
-    public Caesar(Input input, Output output, Key key) {
-        this.input = input;
-        this.output = output;
-        this.key = (RandomKey) key;
+    public Caesar(Key<Integer> key) {
+        this.key=key;
     }
 
     @Override
-    Key getkey() {
-        return key;
+    public int decryption(int oneByte) {
+        return oneByte - (int)key.getKeyValue();
     }
 
     @Override
-    public int operationEncryption(int oneByte) {
-        return oneByte + key.getKey();
-    }
-
-
-    @Override
-    public int operationDecryption(int oneByte) {
-        return oneByte - key.getKey();
+    public int encryption(int oneByte) {
+        return oneByte + (int)key.getKeyValue();
     }
 
 }

@@ -18,14 +18,14 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
+    <orderEntry type="module-library" scope="TEST">
       <library>
         <CLASSES>
-          <root url="jar://Z:/sivan shafrir/sivan shafrir/mockito-all-1.9.5.jar!/" />
+          <root url="jar://$MODULE_DIR$/../mockito-all-1.9.5.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="jar://Z:/sivan shafrir/sivan shafrir/mockito-all-1.9.5.jar!/" />
+          <root url="jar://$MODULE_DIR$/../mockito-all-1.9.5.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>
